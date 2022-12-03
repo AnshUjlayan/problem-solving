@@ -8,12 +8,12 @@ public:
             ump[x]++;
         
         set<pair<int,char>> pq;
-        for (auto[ch,c] : ump)
-            pq.insert({-c, ch});
+        for (auto[ch,freq] : ump)
+            pq.insert({-freq, ch});
         
         string ans = "";
-        for (auto[c,ch] : pq)
-            ans += string(-c, ch);
+        for (auto[freq,ch] : pq)
+            ans += string(-freq, ch);
         
         return ans;
     }
