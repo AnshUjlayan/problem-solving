@@ -4,7 +4,7 @@ public:
     int minimumAverageDifference(vector<int>& nums) 
     {
         int n = nums.size();
-        vector<long long> uno, dos;
+        vector<long> uno, dos;
         long temp, sum = 0;
         long ans = INT_MAX;
         int ret = 0;
