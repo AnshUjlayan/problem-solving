@@ -3,13 +3,13 @@ private:
     int slots[3] = {0};
 public:
     ParkingSystem(int big, int medium, int small) {
-        slots[0] = big;
-        slots[1] = medium;
-        slots[2] = small;
+        this->slots[0] = big;
+        this->slots[1] = medium;
+        this->slots[2] = small;
     }
     
     bool addCar(int carType) {
-        if(slots[carType - 1]-- <= 0) {
+        if(this->slots[carType - 1]-- <= 0) {
             return false;
         }
         return true;
