@@ -8,7 +8,7 @@ private:
         }
         return true;
     }
-    void func(string& s, vector<vector<string>>& result, vector<string> str, int idx) {
+    void func(string& s, vector<vector<string>>& result, vector<string>& str, int idx) {
         if(idx >= s.size()) {
             result.push_back(str);
             return;
