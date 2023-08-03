@@ -1,20 +1,19 @@
 class Solution {
 private:
-    void func(string& digits, unordered_map<char,string>& phone, vector<string>& result, string& curr, int idx) {
-        if(idx >= digits.size()) {
-            if(!curr.empty())
-                result.push_back(curr);
+    void func(string& digits, unordered_map<char, string>& phone, vector<string>& result, string& ans, int idx) {
+        if(idx == digits.size()) {
+            if(!ans.empty())
+                result.push_back(ans);
             return;
         }
-        string characters = phone[digits[idx]];
-        for(auto& c : characters) {
-            curr += c;
-            func(digits, phone, result, curr, idx + 1);
-            curr.pop_back();
+        for(char& c : phone[digits[idx]]) {
+            ans += c;
+            func(digits, phone, result, ans, idx + 1);
+            ans.pop_back();
         }
     }
 public:
-    vector<string> letterCombinations(string& digits) {
+    vector<string> letterCombinations(string digits) {
         unordered_map<char, string> phone {
             {'2', "abc"}, 
             {'3', "def"}, 
@@ -26,8 +25,8 @@ public:
             {'9', "wxyz"}
         };
         vector<string> result;
-        string curr = "";
-        func(digits, phone, result, curr, 0);
+        string ans = "";
+        func(digits, phone, result, ans, 0);
         return result;
     }
 };
