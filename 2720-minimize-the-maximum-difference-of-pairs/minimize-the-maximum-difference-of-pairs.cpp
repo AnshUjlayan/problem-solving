@@ -12,7 +12,7 @@ private:
 public:
     int minimizeMax(vector<int>& nums, int p) {
         sort(nums.begin(), nums.end());
-        int l = 0, r = INT_MAX;
+        int l = 0, r = nums[nums.size() - 1] - nums[0];
         int result = r;
         while(l <= r) {
             int mid = l + (r - l) / 2;
