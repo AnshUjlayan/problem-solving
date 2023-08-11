@@ -1,20 +1,16 @@
 class Solution {
 private:
     int func(vector<int>& coins, vector<vector<int>>& dp, int amount, int idx) {
-        if(idx == coins.size()) {
-            if(amount == 0) {
-                return 1;
-            }
+        if(amount == 0) {
+            return 1;
+        }
+        if(idx == coins.size() || amount < 0) {
             return 0;
         }
         if(dp[idx][amount] != -1) {
             return dp[idx][amount];
         }
-        int res = 0;
-        for(int i = 0; i <= amount / coins[idx]; i++) {
-            res += func(coins, dp, amount - (i * coins[idx]), idx + 1);
-        }
-        return dp[idx][amount] = res;
+        return dp[idx][amount] = func(coins, dp, amount - coins[idx], idx) + func(coins, dp, amount, idx + 1);
     }
 public:
     int change(int amount, vector<int>& coins) {
