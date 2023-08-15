@@ -11,32 +11,12 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode* lessHead = nullptr;
-        ListNode* moreHead = nullptr;
-        ListNode* lessTail = nullptr;
-        ListNode* moreTail = nullptr;
+        ListNode* lessHead = new ListNode();
+        ListNode* moreHead = new ListNode();
+        ListNode* lessTail = lessHead;
+        ListNode* moreTail = moreHead;
         ListNode* curr = head;
         while(curr) {
-            if(curr->val < x) {
-                lessHead = lessTail = curr;
-                break;
-            }
-            curr = curr->next;
-        }
-        curr = head;
-        while(curr) {
-            if(curr->val >= x) {
-                moreHead = moreTail = curr;
-                break;
-            }
-            curr = curr->next;
-        }
-        curr = head;
-        while(curr) {
-            if(curr == lessHead || curr == moreHead) {
-                curr = curr->next;
-                continue;
-            }
             if(curr->val < x) {
                 lessTail->next = curr;
                 lessTail = lessTail->next;
@@ -47,6 +27,8 @@ public:
             }
             curr = curr->next;
         }
+        lessHead = lessHead->next;
+        moreHead = moreHead->next;
         if(lessTail)
             lessTail->next = moreHead;
         if(moreTail)
