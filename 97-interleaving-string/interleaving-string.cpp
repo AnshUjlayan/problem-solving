@@ -1,20 +1,20 @@
 class Solution {
 private:
-    bool func(vector<vector<vector<int>>>& dp, string& finalStr, string& s1, string& s2, int f, int a, int b) {
-        if(a == s1.size() && b == s2.size()) {
+    bool func(vector<vector<int>>& dp, string& finalStr, string& s1, string& s2, int a, int b) {
+        if(a + b == finalStr.size()) {
             return true;
         }
-        if(dp[f][a][b] != -1) {
-            return dp[f][a][b];
+        if(dp[a][b] != -1) {
+            return dp[a][b];
         }
         bool p = false, q = false;
-        if(a < s1.size() && s1[a] == finalStr[f]) {
-            p = func(dp, finalStr, s1, s2, f + 1, a + 1, b);
+        if(a < s1.size() && s1[a] == finalStr[a + b]) {
+            p = func(dp, finalStr, s1, s2, a + 1, b);
         }
-        if(b < s2.size() && s2[b] == finalStr[f]) {
-            q = func(dp, finalStr, s1, s2, f + 1, a, b + 1);
+        if(b < s2.size() && s2[b] == finalStr[a + b]) {
+            q = func(dp, finalStr, s1, s2, a, b + 1);
         }
-        return dp[f][a][b] = p || q;
+        return dp[a][b] = p || q;
     }
 public:
     bool isInterleave(string& s1, string& s2, string& s3) {
@@ -22,7 +22,7 @@ public:
         if(a + b != c) {
             return false;
         }
-        vector<vector<vector<int>>> dp(c + 1, vector<vector<int>>(a + 1, vector<int>(b + 1, -1)));
-        return func(dp, s3, s1, s2, 0, 0, 0);
+        vector<vector<int>> dp(a + 1, vector<int>(b + 1, -1));
+        return func(dp, s3, s1, s2, 0, 0);
     }
 };
