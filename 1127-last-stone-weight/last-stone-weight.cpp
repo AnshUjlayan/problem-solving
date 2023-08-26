@@ -7,8 +7,8 @@ public:
             pq.pop();
             int y = pq.top();
             pq.pop();
-            if(abs(x - y) > 0) {
-                pq.push(abs(x - y));
+            if(x - y > 0) {
+                pq.push(x - y);
             }
         }
         return pq.size() ? pq.top() : 0;
