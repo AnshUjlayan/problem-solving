@@ -4,7 +4,7 @@ public:
         int time = 0;
         unordered_map<char,int> ump;
         priority_queue<pair<int,char>> taskList;
-        priority_queue<pair<int,pair<int,char>>, vector<pair<int,pair<int,char>>>, greater<pair<int,pair<int,char>>>> waitingList;
+        queue<pair<int,pair<int,char>>> waitingList;
         for(char& task : tasks) {
             ump[task]++;
         }
@@ -20,8 +20,8 @@ public:
                     waitingList.push({time + n, currTask});
                 }
             }
-            while(!waitingList.empty() && waitingList.top().first <= time) {
-                taskList.push(waitingList.top().second);
+            while(!waitingList.empty() && waitingList.front().first <= time) {
+                taskList.push(waitingList.front().second);
                 waitingList.pop();
             }
             time++;
