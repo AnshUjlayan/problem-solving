@@ -1,9 +1,10 @@
 class Solution {
 private:
-    void func(string& digits, unordered_map<char, string>& phone, vector<string>& result, string& ans, int idx) {
+    void func(string& digits, unordered_map<char,string>& phone, vector<string>& result, string& ans, int idx) {
         if(idx == digits.size()) {
-            if(!ans.empty())
+            if(!ans.empty()) {
                 result.push_back(ans);
+            }
             return;
         }
         for(char& c : phone[digits[idx]]) {
