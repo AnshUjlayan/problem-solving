@@ -1,12 +1,12 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        int result = INT_MIN, n = nums.size(), low = 1, high = 1;
-        for(int i = 0; i < n; i++) {
-            int temp = nums[i] * high;
-            high = max({nums[i], temp, nums[i] * low});
-            low = min({nums[i], temp, nums[i] * low});
-            result = max(result, high);
+        int result = INT_MIN, currMin = 1, currMax = 1;
+        for(int num : nums) {
+            int temp = currMax * num;
+            currMax = max({num, temp, currMin * num});
+            currMin = min({num, temp, currMin * num});
+            result = max(result, currMax);
         }
         return result;
     }
