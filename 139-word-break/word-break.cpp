@@ -1,26 +1,23 @@
 class Solution {
 private:
-    bool func(unordered_map<int,bool>& dp, string& s, unordered_set<string>& wordSet, int idx) {
-        if(idx == s.size()) {
+    bool func(unordered_map<string,bool>& dp, string s, vector<string>& wordDict) {
+        if(s.empty()) {
             return true;
         }
-        if(dp.find(idx) != dp.end())
-            return dp[idx];
-        string ans = "";
+        if(dp.find(s) != dp.end()) {
+            return dp[s];
+        }
         bool result = false;
-        int slime = idx;
-        while(!result && idx < s.size()) {
-            ans += s[idx++];
-            if(wordSet.find(ans) != wordSet.end() && func(dp, s, wordSet, idx)) {
-                result = true;
+        for(int i = 0; i <= s.size(); i++) {
+            if(find(wordDict.begin(), wordDict.end(), s.substr(0, i)) != wordDict.end()) {
+                result = result || func(dp, s.substr(i), wordDict);
             }
         }
-        return dp[slime] = result;
+        return dp[s] = result;
     }
 public:
-    bool wordBreak(string& s, vector<string>& wordDict) {
-        unordered_map<int,bool> dp;
-        unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
-        return func(dp, s, wordSet, 0);
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_map<string,bool> dp;
+        return func(dp, s, wordDict);
     }
 };
