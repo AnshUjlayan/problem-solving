@@ -8,9 +8,9 @@ public:
         target /= 2;
         unordered_set<int> dp;
         dp.insert(0);
-        for(int num : nums) {
+        for(int& num : nums) {
             unordered_set<int> nextDp = dp;
-            for(int val : dp) {
+            for(auto& val : dp) {
                 nextDp.insert(num + val);
             }
             dp = nextDp;
