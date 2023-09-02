@@ -1,16 +1,12 @@
 class Solution {
 private:
-    int calc(vector<int>& dp, string str, string s, int i) {
-        int idx = 0, len = str.size();
-        if(s.size() < str.size() || str != s.substr(i, len)) {
-            return INT_MAX;
-        }
-        return dp[i + len];
-    }
-    int func(vector<string>& dictionary, vector<int>& dp, string s, int i) {
+    int func(unordered_set<string>& dict, vector<int>& dp, string s, int l) {
         int result = INT_MAX;
-        for(auto& str : dictionary) {
-            result = min(result, calc(dp, str, s, i));
+        for(int r = l; r < s.size(); r++) {
+            string currStr = s.substr(l, r - l + 1);
+            if(dict.find(currStr) != dict.end()) {
+                result = min(result, dp[r + 1]);
+            }
         }
         return result;
     }
@@ -18,9 +14,9 @@ public:
     int minExtraChar(string s, vector<string>& dictionary) {
         int n = s.size();
         vector<int> dp(n + 1);
-        dp[n] = 0;
+        unordered_set<string> dict(dictionary.begin(), dictionary.end());
         for(int i = n - 1; i >= 0; i--) {
-            dp[i] = min({dp[i + 1] + 1, func(dictionary, dp, s, i)});
+            dp[i] = min({dp[i + 1] + 1, func(dict, dp, s, i)});
         }
         return dp[0];
     }
