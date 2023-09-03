@@ -1,23 +1,20 @@
 class Solution {
 private:
-    bool similar(string a, string b) {
-        int cnt = 0;
-        for(int i = 0; i < a.size(); i++) {
-            if(a[i] != b[i]) {
-                cnt++;
-            }
-        }
-        return cnt <= 1;
-    }
     unordered_map<string,vector<string>> makeAdj(vector<string>& wordList) {
         int n = wordList.size();
         unordered_map<string,vector<string>> adj(n);
+        unordered_set<string> dict(wordList.begin(), wordList.end());
         for(int i = 0; i < n; i++) {
-            for(int j = i + 1; j < n; j++) {
-                if(similar(wordList[i], wordList[j])) {
-                    adj[wordList[i]].push_back(wordList[j]);
-                    adj[wordList[j]].push_back(wordList[i]);
+            string temp = wordList[i];
+            for(int j = 0; j < temp.size(); j++) {
+                char c = temp[j];
+                for(int k = 0; k < 26; k++) {
+                    temp[j] = 'a' + k;
+                    if(dict.find(temp) != dict.end()) {
+                        adj[wordList[i]].push_back(temp);
+                    }
                 }
+                temp[j] = c;
             }
         }
         return adj;
