@@ -4,13 +4,13 @@ public:
         vector<int> dp(n);
         dp[0] = 1;
         for(int i = 0; i < m; i++) {
-            vector<int> newDp = dp;
+            vector<int> nextDp = dp;
             for(int j = 0; j < n; j++) {
                 if(j > 0) {
-                    newDp[j] += newDp[j - 1];
+                    nextDp[j] += nextDp[j - 1];
                 }
             }
-            dp = newDp;
+            dp = nextDp;
         }
         return dp[n - 1];
     }
