@@ -4,30 +4,30 @@ private:
     vector<int> rank;
 public:
     DSU(int nodes) {
-        this->rank.resize(nodes, 0);
-        this->parent.resize(nodes);
+        rank.resize(nodes, 0);
+        parent.resize(nodes);
         for(int i = 0; i < nodes; i++) {
-            this->parent[i] = i;
+            parent[i] = i;
         }
     }
     int find(int u) {
-        if(this->parent[u] != u) {
-            return this->parent[u] = find(this->parent[u]);
+        if(parent[u] != u) {
+            return parent[u] = find(parent[u]);
         }
-        return this->parent[u];
+        return parent[u];
     }
     void join(int u, int v) {
         int parentU = find(u);
         int parentV = find(v);
-        if(this->rank[parentU] > this->rank[parentV]) {
-            this->parent[parentV] = parentU;
+        if(rank[parentU] > rank[parentV]) {
+            parent[parentV] = parentU;
         }
-        else if(this->rank[parentU] < this->rank[parentV]) {
-            this->parent[parentU] = parentV;
+        else if(rank[parentU] < rank[parentV]) {
+            parent[parentU] = parentV;
         }
         else {
-            this->parent[parentV] = parentU;
-            this->rank[parentU]++;
+            parent[parentV] = parentU;
+            rank[parentU]++;
         }
     }
     bool same(int u, int v) {
