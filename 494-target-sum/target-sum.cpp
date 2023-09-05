@@ -1,17 +1,16 @@
 class Solution {
-private:
-    int func(vector<unordered_map<int,int>>& dp, vector<int>& nums, int target, int idx) {
-        if(idx == nums.size()) {
-            return target == 0;
-        }
-        if(dp[idx].find(target) != dp[idx].end()) {
-            return dp[idx][target];
-        }
-        return dp[idx][target] = func(dp, nums, target + nums[idx], idx + 1) + func(dp, nums, target - nums[idx], idx + 1);
-    }
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
-        vector<unordered_map<int,int>> dp(nums.size());
-        return func(dp, nums, target, 0);
+        vector<int> dp(2001, 0);
+        dp[1000] = 1;
+        for(int i = 0; i < nums.size(); i++) {
+            vector<int> nextDp(2001, 0);
+            for(int j = 0; j < 2001; j++) {
+                nextDp[j] += j - nums[i] >= 0 ? dp[j - nums[i]] : 0;
+                nextDp[j] += j + nums[i] < 2000 ? dp[j + nums[i]] : 0;
+            }
+            dp = nextDp;
+        }
+        return dp[1000 + target];
     }
 };
