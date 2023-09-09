@@ -19,13 +19,13 @@ public:
                 continue;
             }
             if(newInterval[0] < l) {
-                result.push_back({newInterval[0], newInterval[1]});
+                result.push_back({newInterval});
                 newInterval[0] = 1e5 + 1;
             }
             result.push_back({l, r});
         }
         if(result.empty() || newInterval[0] != 1e5 + 1) {
-            result.push_back({newInterval[0], newInterval[1]});
+            result.push_back({newInterval});
         }
         return result;
     }
