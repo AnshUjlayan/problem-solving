@@ -40,20 +40,9 @@ class DSU {
 class Solution {
   private:
     bool slimy(string a, string b) {
-      if(a.size() != b.size()) {
-        return false;
-      }
-      vector<int> freq(26, 0);
       int slime = 0;
       for(int i = 0; i < a.size(); i++) {
         slime += a[i] == b[i] ? 0 : 1;
-        freq[a[i] - 'a']++;
-        freq[b[i] - 'a']--;
-      }
-      for(int& f : freq) {
-        if(f != 0) {
-          return false;
-        }
       }
       return slime == 0 || slime == 2;
     }
