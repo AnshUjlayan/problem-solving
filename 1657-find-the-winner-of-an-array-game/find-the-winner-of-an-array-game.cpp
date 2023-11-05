@@ -1,18 +1,16 @@
 class Solution {
 public:
     int getWinner(vector<int>& arr, int k) {
-        int n = arr.size();
-        int count = 0, curr = 0;
-        while(count < k && curr < n - 1) {
-            int next = (curr + 1) % n;
+        int n = arr.size(), count = 0, curr = 0, next = curr + 1;
+        while(next < n && count < k) {
             if(arr[curr] > arr[next]) {
                 count++;
-                swap(arr[curr], arr[next]);
             }
             else {
                 count = 1;
+                curr = next;
             }
-            curr = next;
+            next++;
         }
         return arr[curr];
     }
