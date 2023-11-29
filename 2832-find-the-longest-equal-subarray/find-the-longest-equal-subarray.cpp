@@ -1,14 +1,12 @@
 class Solution {
 private:
     int getSlimy(vector<int>& nums, int k) {
-        int n = nums.size(), result = 0;
-        deque<int> dq;
-        for(int i = 0; i < n; i++) {
-            dq.push_front(nums[i]);
-            while(dq.front() - dq.back() - ((int)dq.size() - 1) > k) {
-                dq.pop_back();
+        int n = nums.size(), result = 0, l = 0, r = 0;
+        while(r < n) {
+            while((nums[r] - nums[l]) - (r - l) > k) {
+                l++;
             }
-            result = max(result, (int)dq.size());
+            result = max(result, ++r - l);
         }
         return result;
     }
