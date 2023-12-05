@@ -1,8 +1,6 @@
 class Solution {
 public:
     string shiftingLetters(string s, vector<vector<int>>& shifts) {
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        sort(shifts.begin(), shifts.end());
         int m = s.size(), n = shifts.size();
         int rotations = 0, ptr = 0;
         auto shift = [&](int idx) {
@@ -11,18 +9,14 @@ public:
             moves += moves < 0 ? 26 : 0;
             s[idx] = moves + 'a';
         };
+        vector<int> sum(m + 1, 0);
+        for(int i = 0; i < n; i++) {
+            sum[shifts[i][0]] += shifts[i][2] == 0 ? -1 : 1;
+            sum[shifts[i][1] + 1] -= shifts[i][2] == 0 ? -1 : 1;
+        }
         for(int i = 0; i < m; i++) {
-            while(ptr < n && shifts[ptr][0] == i) {
-                int dir = shifts[ptr][2] == 0 ? -1 : 1;
-                pq.push({shifts[ptr][1], dir});
-                rotations += dir;
-                ptr++;
-            }
+            rotations += sum[i];
             shift(i);
-            while(!pq.empty() && pq.top().first == i) {
-                rotations -= pq.top().second;
-                pq.pop();
-            }
         }
         return s;
     }
