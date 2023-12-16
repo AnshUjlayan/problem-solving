@@ -1,17 +1,18 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        unordered_map<char,int> ump;
-        for(int i = 0; i < s.size(); i++) {
-            ump[s[i]]++;
-            ump[t[i]]--;
-            if(ump[t[i]] == 0) {
-                ump.erase(t[i]);
-            }
-            if(ump[s[i]] == 0) {
-                ump.erase(s[i]);
+        vector<int> dict(26, 0);
+        for(char& c : s) {
+            dict[c - 'a']++;
+        }
+        for(char& c : t) {
+            dict[c - 'a']--;
+        }
+        for(int& num : dict) {
+            if(num != 0) {
+                return false;
             }
         }
-        return s.size() == t.size() && ump.empty();
+        return true;
     }
 };
