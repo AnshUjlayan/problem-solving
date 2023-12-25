@@ -16,9 +16,6 @@ public:
                 dp[i] += dp[i + 2];
             }
         }
-        for(int d : dp) {
-            cout<<d<<" ";
-        }
         return dp[0];
     }
 };
