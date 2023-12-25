@@ -1,22 +1,24 @@
 class Solution {
 public:
     int numDecodings(string s) {
-        unordered_set<string> ust;
-        for(int i = 1; i <= 26; i++) {
-            ust.insert(to_string(i));
-        }
-        int a = 1, b = 1;
-        for(int i = s.size() - 1; i >= 0; i--) {
-            int temp = 0;
-            if(ust.find(s.substr(i, 1)) != ust.end()) {
-                temp += a;
+        int n = s.size();
+        vector<int> dp(n + 2, 0);
+        dp[n] = 1, dp[n + 1] = 1;
+        dp[n - 1] = s[n - 1] != '0' ? 1 : 0;
+        for(int i = n - 2; i >= 0; i--) {
+            if(s[i] == '0') {
+                continue;
             }
-            if(i + 1 < s.size() && ust.find(s.substr(i, 2)) != ust.end()) {
-                temp += b;
+            if(dp[i + 1] != 0) {
+                dp[i] += dp[i + 1];
             }
-            b = a;
-            a = temp;
+            if(dp[i + 2] != 0 && ((s[i] == '2' && s[i + 1] <= '6') || (s[i] == '1'))) {
+                dp[i] += dp[i + 2];
+            }
         }
-        return a;
+        for(int d : dp) {
+            cout<<d<<" ";
+        }
+        return dp[0];
     }
 };
