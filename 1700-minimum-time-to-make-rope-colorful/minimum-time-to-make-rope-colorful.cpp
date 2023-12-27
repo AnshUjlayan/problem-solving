@@ -17,6 +17,9 @@ private:
     }
 public:
     int minCost(string colors, vector<int>& neededTime) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
         vector<vector<int>> dp(27, vector<int>(colors.size(), -1));
         return func(dp, colors, neededTime, 26, 0);
     }
