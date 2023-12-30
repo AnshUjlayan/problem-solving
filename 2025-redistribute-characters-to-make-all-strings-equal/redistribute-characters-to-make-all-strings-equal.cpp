@@ -1,18 +1,17 @@
 class Solution {
 public:
     bool makeEqual(vector<string>& words) {
-        if(words.size() == 1)
-            return true;
-        unordered_map<char,int> ump;
         int n = words.size();
-        for(auto& word : words) {
-            for(auto& c : word) {
-                ump[c]++;
+        vector<int> freq(26, 0);
+        for(string& word : words) {
+            for(char& c : word) {
+                freq[c - 'a']++;
             }
         }
-        for(auto& ch : ump) {
-            if(ch.second % n != 0)
+        for(int& f : freq) {
+            if(f % n != 0) {
                 return false;
+            }
         }
         return true;
     }
