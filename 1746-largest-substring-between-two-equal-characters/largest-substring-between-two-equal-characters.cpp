@@ -2,16 +2,15 @@ class Solution {
 public:
     int maxLengthBetweenEqualCharacters(string s) {
         int n = s.size(), result = -1;
-        for(int i = 0; i < 26; i++) {
-            char c = 'a' + i;
-            int l = 0, r = n - 1;
-            while(l < n && s[l] != c) {
-                l++;
+        vector<int> chars(26, -1);
+        for(int i = 0; i < n; i++) {
+            int c = s[i] - 'a';
+            if(chars[c] != -1) {
+                result = max(result, i - chars[c] - 1);
             }
-            while(r >= 0 && s[r] != c) {
-                r--;
+            else {
+                chars[c] = i;
             }
-            result = max(result, r - l - 1);
         }
         return result;
     }
