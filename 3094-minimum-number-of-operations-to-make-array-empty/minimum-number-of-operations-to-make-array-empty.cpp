@@ -1,21 +1,16 @@
 class Solution {
 private:
-    vector<int> dp;
     int getSlimy(int n) {
-        if(n == 0) {
-            return 0;
+        if(n < 2) {
+            return -1;
         }
-        if(n < 0) {
-            return 1e6;
+        if(n == 2 || n == 3) {
+            return 1;
         }
-        if(dp[n] != -1) {
-            return dp[n];
-        }
-        return dp[n] = 1 + min(getSlimy(n - 2), getSlimy(n - 3));
+        return n / 3 + (n % 3 == 0 ? 0 : 1);
     }
 public:
     int minOperations(vector<int>& nums) {
-        this->dp.resize(1e6 + 1, -1);
         map<int,int> mp;
         int result = 0;
         for(int& num : nums) {
@@ -23,7 +18,7 @@ public:
         }
         for(auto& [key, val] : mp) {
             int calc = getSlimy(val);
-            if(calc >= 1e6) {
+            if(calc == -1) {
                 return -1;
             }
             result += calc;
