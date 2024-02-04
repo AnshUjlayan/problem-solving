@@ -1,34 +1,26 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        int resLen = INT_MAX, resIdx = s.size() - 1, have = 0, need = 0, l = 0, r = 0;
-        unordered_map<char,int> ump1, ump2;
-
-        for(char c : t) {
-            ump2[c]++;
-            if(ump2[c] == 1) {
-                need++;
+        int n = s.size(), req = 0, l = 0, r = 0;
+        vector<int> dict1(58, 0), dict2(58, 0);
+        pair<int,int> result {0, 1e9};
+        for(char& c : t) {
+            if(!dict1[c - 'A']++) req++;
+        }
+        while(r < n) {
+            if(++dict2[s[r] - 'A'] == dict1[s[r++] - 'A']) {
+                req--;
+            }
+            while(l < r && req <= 0) {
+                if(result.second - result.first > r - l) {
+                    result = {l, r};
+                }
+                if(dict2[s[l] - 'A']-- == dict1[s[l++] - 'A']) {
+                    req++;
+                }
             }
         }
-
-        while(r < s.size()) {
-            ump1[s[r]]++;
-            if(ump1[s[r]] == ump2[s[r]]) {
-                have++;
-            }
-            r++;
-            while(need == have) {
-                if(r - l < resLen) {
-                    resLen = r - l;
-                    resIdx = l;
-                }
-                ump1[s[l]]--;
-                if(ump1[s[l]] == ump2[s[l]] - 1) {
-                    have--;
-                }
-                l++;
-            }
-        }
-        return resLen == INT_MAX ? "" : s.substr(resIdx, resLen);
+        if(result.second == 1e9) result.second = 0;
+        return s.substr(result.first, result.second - result.first);
     }
 };
