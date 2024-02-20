@@ -5,7 +5,6 @@ public:
         for(int i = 0; i < nums.size(); i++) {
             result ^= nums[i] ^ i;
         }
-        cout<<result<<" "<<nums.size();
         return result ^ nums.size();
     }
 };
