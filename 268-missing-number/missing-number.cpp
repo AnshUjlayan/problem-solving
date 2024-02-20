@@ -1,11 +1,11 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int result = 0, comp = 0;
+        int result = 0;
         for(int i = 0; i < nums.size(); i++) {
-            result ^= nums[i];
-            comp ^= i;
+            result ^= nums[i] ^ i;
         }
-        return result ^ comp ^ nums.size();
+        cout<<result<<" "<<nums.size();
+        return result ^ nums.size();
     }
 };
