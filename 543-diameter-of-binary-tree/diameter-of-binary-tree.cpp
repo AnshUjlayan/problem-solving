@@ -11,19 +11,19 @@
  */
 class Solution {
 private:
-    int findMax(TreeNode* root, int& result) {
+    int result = 0;
+    int getSlimy(TreeNode* root) {
         if(!root) {
             return 0;
         }
-        int l = findMax(root->left, result);
-        int r = findMax(root->right, result);
-        result = max(result, 1 + l + r);
+        int l = getSlimy(root->left);
+        int r = getSlimy(root->right);
+        result = max(result, l + r);
         return 1 + max(l, r);
     }
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        int result = 0;
-        findMax(root, result);
-        return result - 1;
+        getSlimy(root);
+        return this->result;
     }
 };
