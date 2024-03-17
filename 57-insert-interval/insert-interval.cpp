@@ -1,32 +1,24 @@
 class Solution {
-private:
-    bool overlaps(int l, int r, int x, int y) {
-        bool a = x >= l && x <= r;
-        bool b = y >= l && y <= r;
-        bool c = x >= l && y <= r;
-        bool d = x <= l && y >= r;
-        return a || b || c || d;
-    }
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         vector<vector<int>> result;
-        for(int i = 0; i < intervals.size(); i++) {
-            int l = intervals[i][0];
-            int r = intervals[i][1];
-            if(overlaps(l, r, newInterval[0], newInterval[1])) {
-                newInterval[0] = min(l, newInterval[0]);
-                newInterval[1] = max(r, newInterval[1]);
-                continue;
+        intervals.push_back(newInterval);
+        sort(intervals.begin(), intervals.end());
+        int prevL = intervals[0][0];
+        int prevR = intervals[0][1];
+        for(auto& interval : intervals) {
+            int l = interval[0];
+            int r = interval[1];
+            if(l <= prevR) {
+                prevR = max(prevR, r);
             }
-            if(newInterval[0] < l) {
-                result.push_back({newInterval});
-                newInterval[0] = 1e5 + 1;
+            else {
+                result.push_back({prevL, prevR});
+                prevL = l;
+                prevR = r;
             }
-            result.push_back({l, r});
         }
-        if(result.empty() || newInterval[0] != 1e5 + 1) {
-            result.push_back({newInterval});
-        }
+        result.push_back({prevL, prevR});
         return result;
     }
 };
