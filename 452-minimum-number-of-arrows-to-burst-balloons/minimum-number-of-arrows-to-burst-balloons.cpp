@@ -1,6 +1,8 @@
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
         sort(points.begin(), points.end());
         int result = 0, idx = 0, n = points.size();
         long long l = LONG_MIN, r = LONG_MIN;
