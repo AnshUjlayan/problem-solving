@@ -11,6 +11,8 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         string str = "";
         while(head) {
             str.push_back('a' + head->val);
