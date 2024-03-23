@@ -1,6 +1,8 @@
 class Solution {
 public:
     ListNode* reorderList(ListNode* head) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         vector<ListNode*> nodes, result;
         while(head) {
             nodes.push_back(head);
