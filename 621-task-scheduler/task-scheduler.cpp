@@ -1,6 +1,9 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         int time = 0;
         unordered_map<char,int> ump;
         priority_queue<pair<int,char>> taskList;
