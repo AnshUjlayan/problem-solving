@@ -1,21 +1,24 @@
 class Solution {
 public:
     long long countSubarrays(vector<int>& nums, int k) {
-        int maxElement = *max_element(nums.begin(), nums.end());
-        long long ans = 0, start = 0;
-
-        for (int end = 0; end < nums.size(); end++) {
-            if (nums[end] == maxElement) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
+        long long result = 0;
+        int l = 0, r = 0, n = nums.size();
+        int mx = *max_element(nums.begin(), nums.end());
+        while(r < n) {
+            if(nums[r++] == mx) {
                 k--;
             }
-            while (!k) {
-                if (nums[start] == maxElement) {
+            while(!k) {
+                if(nums[l] == mx) {
                     k++;
                 }
-                start++;
+                l++;
             }
-            ans += start;
+            result += l;
         }
-        return ans;
+        return result;
     }
 };
