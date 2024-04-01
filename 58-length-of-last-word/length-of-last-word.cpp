@@ -1,16 +1,21 @@
 class Solution {
 public:
     int lengthOfLastWord(string s) {
-        int result = 0, idx = s.size() -1;
-        while(s[idx] == ' ') {
-            idx--;
-        }
-        for(int i = idx; i >= 0; i--) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
+        int res = 0;
+        for(int i = s.size() - 1; i >= 0; i--) {
             if(s[i] == ' ') {
-                break;
+                if(!res) {
+                    continue;
+                }
+                else {
+                    break;
+                }
             }
-            result++;
+            res++;
         }
-        return result;
+        return res;
     }
 };
