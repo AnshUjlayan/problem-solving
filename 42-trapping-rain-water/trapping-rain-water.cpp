@@ -1,6 +1,8 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         int result = 0, n = height.size(), maxElement = 0;
         vector<int> right(n);
         for(int i = n - 1; i >= 0; --i) {
