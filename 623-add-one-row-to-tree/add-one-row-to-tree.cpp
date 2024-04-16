@@ -24,6 +24,8 @@ private:
     }
 public:
     TreeNode* addOneRow(TreeNode* root, int val, int depth) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         if (depth == 1) {
             return new TreeNode(val, root, nullptr);
         }
