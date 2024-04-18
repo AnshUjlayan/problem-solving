@@ -1,6 +1,8 @@
 class Solution {
 public:
     int islandPerimeter(vector<vector<int>>& grid) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         int result = 0;
         int m = grid.size(), n = grid[0].size();
         for(int i = 0; i < m; i++) {
