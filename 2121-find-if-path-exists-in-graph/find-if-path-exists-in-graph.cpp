@@ -11,6 +11,8 @@ private:
     }
 public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         vector<vector<int>> adj(n);
         vector<bool> visited(n, false);
         for(auto& edge : edges) {
