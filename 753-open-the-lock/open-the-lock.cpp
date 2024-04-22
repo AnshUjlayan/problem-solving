@@ -17,6 +17,8 @@ private:
 
 public:
     int openLock(vector<string>& deadends, string target) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         unordered_set<string> dead(deadends.begin(), deadends.end());
         if(dead.count("0000")) return -1;
         queue<string> q;
