@@ -1,6 +1,8 @@
 class Solution {
 public:
     int longestIdealString(string s, int k) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         vector<int> result(26, 0);
         for (char& c : s) {
             int l = max(0, c - 97 - k);
