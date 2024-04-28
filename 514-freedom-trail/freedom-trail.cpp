@@ -30,6 +30,8 @@ private:
 
 public:
     int findRotateSteps(string& ring, string& key) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         int n = ring.size();
         vector<vector<int>> dp(n, vector<int>(key.size(), -1)), adj(26);
         for (int i = 0; i < n; i++) {
