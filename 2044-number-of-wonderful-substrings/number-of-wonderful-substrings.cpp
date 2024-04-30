@@ -5,14 +5,12 @@ public:
         cin.tie(nullptr);
         long long result = 0;
         int bitmask = 0;
-        map<int,int> mp {{0, 1}};
+        unordered_map<int,int> mp {{0, 1}};
         for(char& c : word) {
-            int mask = 1 << (c - 'a');
-            bitmask ^= mask;
+            bitmask ^= 1 << (c - 'a');
             result += mp[bitmask]++;
             for(int i = 0; i < 10; i++) {
-                int searchMask = bitmask ^ (1 << i);
-                result += mp[searchMask];
+                result += mp[bitmask ^ (1 << i)];
             }
         }
         return result;
