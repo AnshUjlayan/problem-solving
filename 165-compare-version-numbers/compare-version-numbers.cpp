@@ -10,12 +10,8 @@ public:
             int v2 = (it2 != version2.end()) ? stoi(string(it2, e2)) : 0;
             it1 = (e1 != version1.end()) ? e1 + 1 : version1.end();
             it2 = (e2 != version2.end()) ? e2 + 1 : version2.end();
-            if(v1 < v2) {
-                return -1;
-            }
-            else if(v1 > v2) {
-                return 1;
-            }
+            if(v1 < v2) return -1;
+            if(v1 > v2) return 1;
         }
         return 0;
     }
