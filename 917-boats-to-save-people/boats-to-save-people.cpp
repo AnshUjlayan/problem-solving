@@ -4,6 +4,8 @@ const int ZERO = [] () {
 	return 0;
 } ();
 
+#pragma GCC optimize("O3", "unroll-loops")
+
 class Solution {
 public:
     int numRescueBoats(vector<int>& people, int limit) {
