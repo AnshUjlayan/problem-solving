@@ -1,8 +1,12 @@
+const int ZERO = [] () {
+	std::ios_base::sync_with_stdio(false);
+	std::cin.tie(nullptr);
+	return 0;
+} ();
+
 class Solution {
 public:
     int numRescueBoats(vector<int>& people, int limit) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
         sort(people.begin(), people.end());
         vector<int>::iterator l = people.begin();
         vector<int>::iterator r = --people.end();
