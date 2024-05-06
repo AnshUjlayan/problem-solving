@@ -11,6 +11,8 @@
 class Solution {
 public:
     ListNode* removeNodes(ListNode* head) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         if(!head->next) {
             return head;
         }
