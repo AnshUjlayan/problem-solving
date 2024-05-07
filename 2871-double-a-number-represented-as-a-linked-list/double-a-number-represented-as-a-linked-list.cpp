@@ -19,6 +19,8 @@ private:
     }
 public:
     ListNode* doubleIt(ListNode* head) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         head = new ListNode(0, head);
         getSlimy(head);
         if(head->val) return head;
