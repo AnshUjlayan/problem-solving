@@ -6,6 +6,8 @@ private:
 
 public:
     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         priority_queue<pair<double,pair<int,int>>> pq;
         int n = arr.size();
         for(int i = 0; i < n - 1; i++) {
