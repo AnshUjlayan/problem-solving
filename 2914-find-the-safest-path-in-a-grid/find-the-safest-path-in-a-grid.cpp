@@ -4,7 +4,6 @@ public:
         ios_base::sync_with_stdio(false);
         cin.tie(nullptr);
         vector<pair<int, int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        vector<pair<int, int>> escapeDirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         queue<pair<int, int>> thief;
         int m = grid.size(), n = grid[0].size();
         for (int i = 0; i < m; i++) {
@@ -36,7 +35,7 @@ public:
             if (i == m - 1 && j == n - 1) {
                 return safenessFactor - 1;
             }
-            for (auto& [dirX, dirY] : escapeDirs) {
+            for (auto& [dirX, dirY] : dirs) {
                 int x = i + dirX, y = j + dirY;
                 if (x >= 0 && y >= 0 && x < m && y < n && !visited[x][y]) {
                     pq.push({min(safenessFactor, grid[x][y]), {x, y}});
