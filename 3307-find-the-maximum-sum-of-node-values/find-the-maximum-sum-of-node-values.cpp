@@ -22,7 +22,7 @@ public:
         }
 
         if (count & 1) {
-            result -= minGain < minLoss ? minGain : minLoss;
+            result -= min(minGain, minLoss);
         }
 
         return result;
