@@ -1,32 +1,35 @@
 class Solution {
 private:
-    bool isPalindrome(string str) {
-        int l = 0, r = str.size() - 1;
-        while(l <= r) {
-            if(str[l++] != str[r--]) {
+    vector<vector<string>> result;
+    vector<string> temp;
+
+    bool isPalindrome(string &s) {
+        int left = 0, right = s.size() - 1;
+        while (left < right) {
+            if (s[left++] != s[right--]) {
                 return false;
             }
         }
         return true;
     }
-    void func(vector<vector<string>>& result, vector<string>& subset, string s) {
-        if(s.empty()) {
-            result.push_back(subset);
+
+    void getSlimy(string &s, int idx) {
+        if (idx == s.size()) {
+            result.push_back(temp);
             return;
         }
-        for(int i = 1; i <= s.size(); i++) {
-            if(isPalindrome(s.substr(0, i))) {
-                subset.push_back(s.substr(0, i));
-                func(result, subset, s.substr(i));
-                subset.pop_back();
+        for (int i = idx; i <= s.size(); ++i) {
+            string substring = s.substr(idx, i - idx + 1);
+            if (isPalindrome(substring)) {
+                temp.push_back(substring);
+                getSlimy(s, i + 1);
+                temp.pop_back();
             }
         }
     }
 public:
     vector<vector<string>> partition(string s) {
-        vector<vector<string>> result;
-        vector<string> subset;
-        func(result, subset, s);
+        getSlimy(s, 0);
         return result;
     }
 };
