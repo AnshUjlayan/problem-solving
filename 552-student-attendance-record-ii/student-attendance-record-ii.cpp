@@ -20,6 +20,8 @@ private:
 
 public:
     int checkRecord(int n) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(2, vector<int>(3, -1)));
         return static_cast<int>(getSlimy(dp, n, 0, 0));
     }
