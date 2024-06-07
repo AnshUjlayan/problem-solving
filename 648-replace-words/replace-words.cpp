@@ -1,3 +1,4 @@
+#pragma GCC optimize("O3")
 class Solution {
 public:
     string replaceWords(vector<string>& dictionary, string sentence) {
