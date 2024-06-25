@@ -23,6 +23,8 @@ private:
     }
 public:
     TreeNode* bstToGst(TreeNode* root) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         getSlimy(root);
         return root;
     }
