@@ -9,6 +9,17 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+#pragma GCC optimize("03")
+#pragma GCC target ("avx")
+#pragma GCC target ("-fsplit-loops")
+
+auto _ = [](){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL), cout.tie(NULL);
+    return 0;
+}();
+
 class Solution {
 private:
     unordered_map<int,TreeNode*> ump;
