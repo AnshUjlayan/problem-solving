@@ -10,16 +10,6 @@
  * };
  */
 
-#pragma GCC optimize("03")
-#pragma GCC target ("avx")
-#pragma GCC target ("-fsplit-loops")
-
-auto _ = [](){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL), cout.tie(NULL);
-    return 0;
-}();
-
 class Solution {
 private:
     unordered_map<int,TreeNode*> ump;
@@ -31,6 +21,8 @@ private:
     }
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         unordered_map<int,int> degree;
         for (auto& desc : descriptions) {
             degree[desc[0]] = degree[desc[0]];
