@@ -6,16 +6,19 @@ public:
         for (int& num : nums) {
             mp[num]++;
         }
-        vector<pair<int,int>> dard;
+
+        map<int, vector<int>> mp2;
+
         for (auto& [num, freq] : mp) {
-            dard.push_back({freq, num});
+            mp2[freq].push_back(num);
         }
-        sort(dard.begin(), dard.end(), [](const auto& x, const auto& y) {
-            return x.first == y.first ? x.second > y.second : x.first < y.first;
-        });
-        for (auto& [freq, num] : dard) {
-            while (freq--) {
-                result.push_back(num);
+
+        for (auto& [freq, arr] : mp2) {
+            sort(arr.rbegin(), arr.rend());
+            for (int j = 0; j < arr.size(); j++) {
+                for (int k = 0; k < freq; k++) {
+                    result.push_back(arr[j]);
+                }
             }
         }
         return result;
