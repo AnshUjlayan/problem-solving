@@ -13,6 +13,8 @@ private:
 
 public:
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         vector<pair<int,int>> dard;
         vector<int> result;
         for (const int& num : nums) {
