@@ -1,19 +1,20 @@
 class KthLargest {
 private:
-    priority_queue<int, vector<int>, greater<int>> heap;
-    int heapSize;
+    int k;
+    priority_queue<int, vector<int>, greater<int>> pq;
+
 public:
     KthLargest(int k, vector<int>& nums) {
-        this->heap = priority_queue<int, vector<int>, greater<int>>(nums.begin(), nums.end());
-        this->heapSize = k;
+        pq = priority_queue<int, vector<int>, greater<int>>(nums.begin(),
+                                                            nums.end());
+        this->k = k;
     }
-    
+
     int add(int val) {
-        heap.push(val);
-        while(heap.size() > heapSize) {
-            heap.pop();
-        }
-        return heap.top();
+        pq.push(val);
+        while (pq.size() > k)
+            pq.pop();
+        return pq.top();
     }
 };
 
