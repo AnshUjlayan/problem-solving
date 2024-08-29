@@ -4,7 +4,6 @@ private:
     unordered_map<int,int> parent;
     unordered_map<int,int> size;
 
-
 public:
     DSU(int n) {
         groups = n;
@@ -43,18 +42,18 @@ public:
     int removeStones(vector<vector<int>>& stones) {
         ios_base::sync_with_stdio(false);
         cin.tie(nullptr);
-        
+
         int n = stones.size();
-        DSU dsu(n);
+        DSU* dsu = new DSU(n);
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]) {
                     int u = stones[i][0] * 1e4 + stones[i][1];
                     int v = stones[j][0] * 1e4 + stones[j][1];
-                    dsu.join(u, v);
+                    dsu->join(u, v);
                 }
             }
         }
-        return n - dsu.getGroups();
+        return n - dsu->getGroups();
     }
 };
