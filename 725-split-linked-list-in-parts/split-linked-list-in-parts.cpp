@@ -10,41 +10,40 @@
  */
 class Solution {
 private:
-    int getLength(ListNode* head) {
-        ListNode* curr = head;
-        int len = 0;
-        while(curr) {
-            len++;
-            curr = curr->next;
-        }
-        return len;
-    }
-    ListNode* getGroup(ListNode* head, int groupSize, int& offset) {
-        if(offset) {
-            groupSize++;
-            offset--;
-        }
-        while(head && groupSize--) {
+    void getSlimy(vector<ListNode*> &result, ListNode *head, int seg, int &rem, int k) {
+        if (!k)
+            return;
+
+        result.push_back(head);
+
+        int cnt = seg;
+        while (head && --cnt > 0)
             head = head->next;
-        }
-        ListNode* temp = head;
-        if(head) {
-            temp = head->next;
+
+        if (seg > 0 && rem-- > 0)
+            head = head->next;
+
+        ListNode* next = head ? head->next : nullptr;
+        getSlimy(result, next, seg, rem, k - 1);
+
+        if (head)
             head->next = nullptr;
-        }
-        return temp;
     }
+
 public:
     vector<ListNode*> splitListToParts(ListNode* head, int k) {
         vector<ListNode*> result;
-        int length = getLength(head);
-        int groupSize = length / k - 1;
-        int offset = length % k;
-        while(k--) {
-            result.push_back(head);
-            ListNode* curr = getGroup(head, groupSize, offset);
-            head = curr;
+        ListNode *curr = head;
+        int len = 0;
+        while (curr) {
+            curr = curr->next;
+            len++;
         }
+
+        int seg = len / k;
+        int rem = len % k;
+
+        getSlimy(result, head, seg, rem, k);
         return result;
     }
 };
