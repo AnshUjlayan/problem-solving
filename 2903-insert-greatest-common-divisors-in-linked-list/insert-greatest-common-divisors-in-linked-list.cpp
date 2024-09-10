@@ -11,10 +11,11 @@
 class Solution {
 public:
     ListNode* insertGreatestCommonDivisors(ListNode* head) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         ListNode* curr = head;
         while (curr->next) {
-            ListNode* mid = new ListNode(__gcd(curr->val, curr->next->val), curr->next);
-            curr->next = mid;
+            curr->next = new ListNode(__gcd(curr->val, curr->next->val), curr->next);
             curr = curr->next->next;
         }
         return head;
