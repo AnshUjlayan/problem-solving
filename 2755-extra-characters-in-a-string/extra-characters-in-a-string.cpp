@@ -1,23 +1,23 @@
 class Solution {
-private:
-    int func(unordered_set<string>& dict, vector<int>& dp, string s, int l) {
-        int result = INT_MAX;
-        for(int r = l; r < s.size(); r++) {
-            string currStr = s.substr(l, r - l + 1);
-            if(dict.find(currStr) != dict.end()) {
-                result = min(result, dp[r + 1]);
-            }
-        }
-        return result;
-    }
 public:
     int minExtraChar(string s, vector<string>& dictionary) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         int n = s.size();
-        vector<int> dp(n + 1);
-        unordered_set<string> dict(dictionary.begin(), dictionary.end());
-        for(int i = n - 1; i >= 0; i--) {
-            dp[i] = min({dp[i + 1] + 1, func(dict, dp, s, i)});
+        vector<int> dp(n, INT_MAX);
+        unordered_set<string> ust(dictionary.begin(), dictionary.end());
+        string temp = "";
+        dp[0] = 1;
+        for (int i = 0; i < n; i++) {
+            temp = "";
+            for (int j = i; j < n; j++) {
+                temp += s[j];
+                dp[j] = min(dp[j], dp[i] + j - i);
+                if (ust.count(temp)) {
+                    dp[j] = min(dp[j], i > 0 ? dp[i - 1] : 0);
+                }
+            }
         }
-        return dp[0];
+        return dp[n - 1];
     }
 };
