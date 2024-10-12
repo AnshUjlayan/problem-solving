@@ -1,27 +1,20 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        unordered_map<char,int> ump1, ump2;
-        if(s1.size() > s2.size()) {
-            return false;
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+        if (s1.size() > s2.size()) return false;
+        int need = 0, map[26] = {0};
+        int l = 0, r = s1.size(), n = s2.size();
+        for (int i = 0; i < r; i++) {
+            need += map[s1[i] - 97]++ ? 0 : 1;
+            need -= --map[s2[i] - 97] ? 0 : 1;
         }
-        for(int i = 0; i < s1.size(); i++) {
-            ump1[s1[i]]++;
-            ump2[s2[i]]++;
+        while (r < n) {
+            if (!need) return true;
+            need -= --map[s2[r++] - 97] ? 0 : 1;
+            need += map[s2[l++] - 97]++ ? 0 : 1;
         }
-        auto cmp = [&]() ->bool {
-            for(int i = 0; i < 26; i++) {
-                if(ump1['a' + i] != ump2['a' + i]) {
-                    return false;
-                }
-            }
-            return true;
-        };
-        int l = 0, r = s1.size();
-        while(r < s2.size() && !cmp()) {
-            ump2[s2[l++]]--;
-            ump2[s2[r++]]++;
-        }
-        return cmp();
+        return !need;
     }
 };
