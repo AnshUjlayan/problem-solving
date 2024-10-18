@@ -6,7 +6,7 @@ private:
             return temp == mx;
         if (dp[idx][temp] != -1)
             return dp[idx][temp];
-        return pain(nums, mx, temp, idx + 1) + pain(nums, mx, temp | nums[idx], idx + 1);
+        return dp[idx][temp] = pain(nums, mx, temp, idx + 1) + pain(nums, mx, temp | nums[idx], idx + 1);
     }
 public:
     int countMaxOrSubsets(vector<int>& nums) {
