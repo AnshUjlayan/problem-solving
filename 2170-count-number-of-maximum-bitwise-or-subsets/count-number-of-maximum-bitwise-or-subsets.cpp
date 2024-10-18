@@ -11,9 +11,9 @@ private:
 public:
     int countMaxOrSubsets(vector<int>& nums) {
         int n = nums.size(), mx = 0, temp = 0, result = 0;
-        dp.resize(n, vector<int>(1e6, -1));
         for (int &num : nums)
             mx |= num;
+        dp.resize(n, vector<int>(mx + 1, -1));
         return pain(nums, mx, 0, 0);
     }
 };
