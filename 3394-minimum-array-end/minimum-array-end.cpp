@@ -4,7 +4,6 @@ public:
         bitset<64> mask(n - 1), res(x);
         int i = 0, j = 0;
         while (i < 64) {
-            cout<<res[i];
             if (!res[i]) {
                 res[i] = mask[j++];
             }
