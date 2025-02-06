@@ -11,8 +11,8 @@ func tupleSameProduct(nums []int) int {
     }
 
     for _, x := range mp {
-        count += (x * (x - 1)) / 2
+        count += x * (x - 1)
     }
 
-    return count * 8
+    return count * 4
 }
