@@ -2,15 +2,16 @@ class Solution {
 public:
     int jump(vector<int>& arr) {
         int n = arr.size();
-        vector<int> tab(n, 1e6);
-        tab[n - 1] = 0;
-
-        for (int i = n - 1; i >= 0; i--) {
-            for (int j = i; j <= i + arr[i]; j++) {
-                if (j < n)
-                    tab[i] = min(tab[i], 1 + tab[j]);
+        int aukat = 0;
+        int potentialAukat = arr[0];
+        int phoneCall = 0;
+        for (int i = 0; i < n; i++) {
+            if (aukat < i) {
+                phoneCall++;
+                aukat = potentialAukat;
             }
+            potentialAukat = max(potentialAukat, i + arr[i]);
         }
-        return tab[0];
+        return phoneCall;
     }
 };
