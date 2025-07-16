@@ -17,8 +17,6 @@ private:
     
 public:
     int maxLen(int n, vector<vector<int>>& edges, string label) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
         int res = 0;
         vector<vector<int>> adj(n);
         vector<vector<vector<int>>> dp(n, vector<vector<int>>(n, vector<int>(1 << n, -1)));
