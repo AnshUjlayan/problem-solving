@@ -1,8 +1,8 @@
 class Solution {
 private:
-    int func(vector<vector<int>>& dp, vector<vector<int>>& adj, string& label, int u, int v, int mask) {
-        if (dp[max(u, v) * 100 + min(u, v)][mask] != -1) {
-            return dp[max(u, v) * 100 + min(u, v)][mask];
+    int func(vector<vector<vector<int>>>& dp, vector<vector<int>>& adj, string& label, int u, int v, int mask) {
+        if (dp[max(u, v)][min(u, v)][mask] != -1) {
+            return dp[max(u, v)][min(u, v)][mask];
         }
         int res = 0;
         for (int a : adj[u]) {
@@ -12,14 +12,16 @@ private:
                 }
             }
         }
-        return dp[max(u, v) * 100 + min(u, v)][mask] = res + 2;
+        return dp[max(u, v)][min(u, v)][mask] = res + 2;
     }
     
 public:
     int maxLen(int n, vector<vector<int>>& edges, string label) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         int res = 0;
-        vector<vector<int>> adj(n + 1);
-        vector<vector<int>> dp(n * 101 + n + 1, vector<int>(1 << n, -1));
+        vector<vector<int>> adj(n);
+        vector<vector<vector<int>>> dp(n, vector<vector<int>>(n, vector<int>(1 << n, -1)));
         for (auto& edge : edges) {
             adj[edge[0]].push_back(edge[1]);
             adj[edge[1]].push_back(edge[0]);
