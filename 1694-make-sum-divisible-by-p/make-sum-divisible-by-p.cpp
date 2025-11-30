@@ -1,8 +1,6 @@
 class Solution {
 public:
     int minSubarray(vector<int>& nums, int p) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
         int result = 1e9, rem = 0, n = nums.size();
         int target = accumulate(nums.begin(), nums.end(), 0ll) % p;
         if (!target) return 0;
